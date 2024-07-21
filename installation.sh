@@ -148,7 +148,7 @@ PUBLIC_IP_ADDRESS=$(curl ifconfig.me)
 
 # Make API request with server information
 echo "Sending API request with server information..."
-curl -X POST -H "Content-Type: application/json" -d "{\"server_id\": \"$SERVER_ID\", \"client_secret\": \"$CLIENT_SECRET\", \"server_info\": \"$SERVER_INFO\",  \"public_ip_address\": \"$PUBLIC_IP_ADDRESS\"}" $API_ENDPOINT
+curl -X PUT -H "Content-Type: application/json" -d "{\"server_id\": \"$SERVER_ID\", \"client_secret\": \"$CLIENT_SECRET\", \"server_info\": \"$SERVER_INFO\",  \"public_ip_address\": \"$PUBLIC_IP_ADDRESS\"}" $API_ENDPOINT
 if [ $? -ne 0 ]; then
     echo "Failed to send API request."
     exit 1
