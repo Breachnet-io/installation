@@ -5,7 +5,7 @@ command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
-Function to install Docker on Debian-based systems (like Ubuntu)
+# Function to install Docker on Debian-based systems (like Ubuntu)
 install_docker_debian() {
     echo "Updating package database..."
     sudo apt-get update -y
@@ -26,7 +26,7 @@ install_docker_debian() {
     sudo apt-get install docker-ce -y
 }
 
-Function to install Docker on RHEL-based systems (like CentOS)
+# Function to install Docker on RHEL-based systems (like CentOS)
 install_docker_rhel() {
     echo "Updating package database..."
     sudo yum update -y
@@ -41,7 +41,7 @@ install_docker_rhel() {
     sudo yum install docker-ce -y
 }
 
-Function to install Docker on Amazon Linux
+# Function to install Docker on Amazon Linux
 install_docker_amazon_linux() {
     echo "Updating package database..."
     sudo yum update -y
@@ -56,7 +56,7 @@ install_docker_amazon_linux() {
     sudo systemctl enable docker
 }
 
-Detect the operating system
+# Detect the operating system
 if grep -q -i "ubuntu" /etc/os-release; then
     OS="ubuntu"
 elif grep -q -i "amzn" /etc/os-release; then
@@ -67,7 +67,7 @@ else
 fi
 
 
-Install Docker if not already installed
+# Install Docker if not already installed
 if ! command_exists docker; then
     if command_exists apt-get; then
         install_docker_debian
@@ -83,7 +83,7 @@ else
     echo "Docker is already installed."
 fi
 
-Start Docker service if not running
+# Start Docker service if not running
 if ! sudo systemctl is-active --quiet docker; then
     echo "Starting Docker service..."
     sudo systemctl start docker
@@ -110,10 +110,10 @@ echo "CLIENT_SECRET: $CLIENT_SECRET"
 echo "ACCOUNT_ID: $ACCOUNT_ID"
 echo "API_ENDPOINT: $API_ENDPOINT"
 
-Set environment variables
+# Set environment variables
 export AWS_PUBLIC_REPO_IMAGE="public.ecr.aws/f9i4e9b2/bn_proxy:latest"
 
-Pull Docker image from AWS public repository
+# Pull Docker image from AWS public repository
 echo "Pulling Docker image from AWS public repository..."
 sudo docker pull $AWS_PUBLIC_REPO_IMAGE
 if [ $? -ne 0 ]; then
@@ -122,7 +122,7 @@ if [ $? -ne 0 ]; then
 fi
 echo "Docker image pulled successfully."
 
-Run Docker container
+# Run Docker container
 echo "Running Docker container..."
 sudo docker run -d --name my-container $AWS_PUBLIC_REPO_IMAGE
 if [ $? -ne 0 ]; then
@@ -131,7 +131,7 @@ if [ $? -ne 0 ]; then
 fi
 echo "Docker container running successfully."
 
-Check if Docker container is running
+# Check if Docker container is running
 sudo docker ps | grep my-container
 if [ $? -ne 0 ]; then
     echo "Docker container is not running."
