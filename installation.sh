@@ -131,14 +131,6 @@ if [ $? -ne 0 ]; then
 fi
 echo "Docker container running successfully."
 
-# Check if Docker container is running
-sudo docker ps | grep my-container
-if [ $? -ne 0 ]; then
-    echo "Docker container is not running."
-    exit 1
-fi
-echo "Docker container is confirmed running."
-
 
 # Get server information
 SERVER_INFO=$(uname -a)
@@ -155,6 +147,10 @@ if [ $? -ne 0 ]; then
 fi
 echo "API request sent successfully."
 
-# Confirm environment variables
-echo "Environment variables set:"
-echo "COLLECTION_ID: $COLLECTION_ID"
+# Check if Docker container is running
+sudo docker ps | grep my-container
+if [ $? -ne 0 ]; then
+    echo "Docker container is not running."
+    exit 1
+fi
+echo "Docker container is confirmed running."
